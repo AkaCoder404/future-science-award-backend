@@ -52,11 +52,14 @@ def handleFileUpload(request : WSGIRequest):
 
     # send response
     response_data = {}
-    response_data['message'] = "success"
+    response_data['message'] = "Form Successfully Submitted"
+    response_data['status'] = 200
     return JsonResponse(response_data)
 
 @csrf_exempt
 def update(request : WSGIRequest):
+    print(request.content_type)
+    print(request.method)
     # if has files, handle upload file method
     if (request.FILES):
         return handleFileUpload(request)
@@ -67,6 +70,5 @@ def update(request : WSGIRequest):
         response_data['message'] = "message"
         return JsonResponse(response_data)  
     # respond to any other request
-    else: 
-
+    else:
         return HttpResponse("Hello, world. You're at the update index")

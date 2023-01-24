@@ -25,14 +25,21 @@ SECRET_KEY = 'django-insecure-l#e7k5yk+^olkw1(&1xx%936yc0vzn34b16l2*j#sx_0bz3b$0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+    '127.0.0.1',
+    'localhost'
+]
 
+# 
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
 INSTALLED_APPS = [
     'update.apps.UpdateConfig',
     'django_cleanup.apps.CleanupConfig',  # clean up files
+    'corsheaders', # 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', #
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +57,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
